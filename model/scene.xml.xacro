@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<mujoco xmlns:xacro="http://www.ros.org/wiki/xacro" model="Multi-Drone Scene">
+
+  <xacro:include filename="quadrotor_macro.xml.xacro" />
+
+  <compiler angle="radian"/>
+  <option timestep="0.005" gravity="0 0 -9.81" density="1.225" viscosity="1.8e-05" integrator="RK4" />
+
+  <extension>
+    <plugin plugin="MujocoRosUtils::ClockPublisher"/>
+    <plugin plugin="MujocoRosUtils::WrenchToActuators"/>
+    <plugin plugin="MujocoRosUtils::OdometryPublisher"/>
+    <plugin plugin="MujocoRosUtils::SensorPublisher"/>
+    <plugin plugin="MujocoRosUtils::ImuPublisher"/>
+  </extension>
+
+  <asset>
+  <texture name="texchecker" type="2d" builtin="checker" width="512" height="512" 
+           rgb1="0.8 0.8 0.8" rgb2="0.2 0.2 0.2" />
+  <material name="matchecker" texture="texchecker" texrepeat="4 4" 
+            reflectance="0.2" shininess="0.5" specular="0.3" />
+  </asset>
+
+  <worldbody>
+    <light pos="0 0 1.5" dir="0 0 -1" directional="true"/>
+    <geom name="floor" type="plane" size="20 20 0.1" material="matchecker" rgba="1 1 1 1" condim="3"/>
+
+
+    <xacro:quadrotor_body prefix="drone_1" pos="0 0 2" euler="0 0 0" />
+
+    <body name="payload" pos="0 0 1">
+      <joint type="free" damping="0.001"/>
+      <geom type="sphere" size="0.05" rgba="0 0 1 0.8" mass="0.1"/>
+    </body>
+
+  </worldbody>
+
+  <actuator>
+    <xacro:quadrotor_actuators prefix="drone_1" />
+  </actuator>
+
+  <sensor>
+    <xacro:quadrotor_physical_sensors prefix="drone_1" />
+    <xacro:quadrotor_sensor_plugins prefix="drone_1" />
+  </sensor>
+
+</mujoco>
