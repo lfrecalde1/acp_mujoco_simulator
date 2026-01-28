@@ -5,7 +5,7 @@
     <body name="${prefix}" pos="${pos}" euler="${euler}">
       <joint name="${prefix}" type="free" damping="0.001" armature="0" pos="0 0 0"/>
       
-      <geom name="${prefix}_core" type="box" size="0.035 0.035 0.015" rgba="1.0 1.0 0.0 1.0" mass=".90"/>
+      <geom name="${prefix}_core" type="box" size="0.035 0.035 0.015" rgba="1.0 1.0 0.0 1.0" mass=".85"/>
       <site name="${prefix}_imu" pos="0 0 0"/>
       
       <geom name="${prefix}_a00" type="box" pos=".071 0.071 0.0" size="0.05 0.01 0.0025" quat=".924 0 0 0.383" rgba="1 0.5 0 1" mass=".035"/>
@@ -36,10 +36,10 @@
 
 
   <xacro:macro name="quadrotor_actuators" params="prefix">
-    <motor site="${prefix}_thrust" name="${prefix}_body_thrust" ctrllimited="true" ctrlrange="0 40.0" gear="0 0 1 0 0 0"/>
-    <motor site="${prefix}_rateX"  name="${prefix}_x_moment" ctrllimited="true" ctrlrange="-0.5 0.5" gear="0 0 0 1 0 0"/>
-    <motor site="${prefix}_rateY"  name="${prefix}_y_moment" ctrllimited="true" ctrlrange="-0.5 0.5" gear="0 0 0 0 1 0"/>
-    <motor site="${prefix}_rateZ"  name="${prefix}_z_moment" ctrllimited="true" ctrlrange="-0.5 0.5" gear="0 0 0 0 0 1"/>
+    <motor site="${prefix}_thrust" name="${prefix}_body_thrust" ctrllimited="true" ctrlrange="0 82.0" gear="0 0 1 0 0 0"/>
+    <motor site="${prefix}_rateX"  name="${prefix}_x_moment" ctrllimited="true" ctrlrange="-0.3 0.3" gear="0 0 0 1 0 0"/>
+    <motor site="${prefix}_rateY"  name="${prefix}_y_moment" ctrllimited="true" ctrlrange="-0.3 0.3" gear="0 0 0 0 1 0"/>
+    <motor site="${prefix}_rateZ"  name="${prefix}_z_moment" ctrllimited="true" ctrlrange="-0.3 0.3" gear="0 0 0 0 0 1"/>
     
     <plugin name="SO3_ctrl_${prefix}" plugin="MujocoRosUtils::AcroMode" joint="${prefix}">
       <config key="actuator_fz"  value="${prefix}_body_thrust"/>
