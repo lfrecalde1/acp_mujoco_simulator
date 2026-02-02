@@ -41,7 +41,7 @@
     <motor site="${prefix}_rateY"  name="${prefix}_y_moment" ctrllimited="true" ctrlrange="-0.3 0.3" gear="0 0 0 0 1 0"/>
     <motor site="${prefix}_rateZ"  name="${prefix}_z_moment" ctrllimited="true" ctrlrange="-0.3 0.3" gear="0 0 0 0 0 1"/>
     
-    <plugin name="SO3_ctrl_${prefix}" plugin="MujocoRosUtils::AcroMode" joint="${prefix}">
+    <plugin name="acro_ctrl_${prefix}" plugin="MujocoRosUtils::AcroMode" joint="${prefix}">
       <config key="actuator_fz"  value="${prefix}_body_thrust"/>
       <config key="actuator_tx"  value="${prefix}_x_moment"/>
       <config key="actuator_ty"  value="${prefix}_y_moment"/>
